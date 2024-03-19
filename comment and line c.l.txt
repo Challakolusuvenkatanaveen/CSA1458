@@ -1,0 +1,29 @@
+def is_comment(line):
+    # Check if the line starts with //
+    if line.startswith("//"):
+        return True
+    # Check if the line contains /* and */ and /* occurs before */
+    elif "/*" in line and "*/" in line and line.index("/*") < line.index("*/"):
+        return True
+    # Check if the line contains /* but not */
+    elif "/*" in line and "*/" not in line:
+        return True
+    else:
+        return False
+
+# Test the function
+lines = [
+    "int main() { // This is a single line comment",
+    "/* This is a multi-line",
+    "comment */",
+    "int a = 5; // This is another single line comment",
+    "/* This is a nested /* multi-line */ comment */",
+    "if (x /* this is an inline comment */ > 0) {",
+    "/* This is an unclosed multi-line comment",
+]
+
+for line in lines:
+    if is_comment(line):
+        print(line, "is a comment")
+    else:
+        print(line, "is not a comment")
